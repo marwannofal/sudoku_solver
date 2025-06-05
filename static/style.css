@@ -1,0 +1,136 @@
+/* static/style.css */
+
+/*─────────────────────────────────────────────
+  0. GLOBAL RESET & LAYOUT
+─────────────────────────────────────────────*/
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #F0F2BD; /* Pale Cream */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+}
+
+/*─────────────────────────────────────────────
+  1. HEADING
+─────────────────────────────────────────────*/
+.container h1 {
+  margin-bottom: 16px;
+  color: #4B352A; /* Dark Brown */
+  font-size: 1.75rem;
+}
+
+/*─────────────────────────────────────────────
+  2. SUDOKU GRID
+─────────────────────────────────────────────*/
+.sudoku-grid {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 2px;
+  background: #4B352A;  /* Dark Brown border around entire grid */
+  border: 4px solid #4B352A;
+  margin: 0 auto 16px;
+  width: 100%;
+  aspect-ratio: 1 / 1; /* The entire grid stays square */
+}
+
+.sudoku-grid input {
+  width: 100%;
+  aspect-ratio: 1 / 1;      /* Each cell is a perfect square */
+  display: flex;            /* Center the digit via flexbox */
+  align-items: center;      /* Vertical center */
+  justify-content: center;  /* Horizontal center */
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-align: center;       /* Not strictly needed once we have flex centering */
+  border: 1px solid #4B352A;/* Dark Brown for normal cell borders */
+  background: #B2CD9C;      /* Soft Green background inside each cell */
+  color: #4B352A;           /* Dark Brown digit color */
+  outline: none;
+}
+
+/* Thicker vertical borders every 3 columns */
+.sudoku-grid input:nth-child(3n) {
+  border-right: 3px solid #4B352A; /* Dark Brown, a bit thicker */
+}
+
+/* Thicker horizontal borders every 3 rows */
+.sudoku-grid input:nth-child(n + 19):nth-child(-n + 27),
+.sudoku-grid input:nth-child(n + 46):nth-child(-n + 54),
+.sudoku-grid input:nth-child(n + 73):nth-child(-n + 81) {
+  border-bottom: 3px solid #4B352A; /* Dark Brown, slightly thicker */
+}
+
+/* Focus highlight */
+.sudoku-grid input:focus {
+  background: #F0F2BD;  /* Pale Cream when focused for high contrast */
+  border-color: #CA7842;/* Warm Orange border on focus */
+  z-index: 10;
+}
+
+/*─────────────────────────────────────────────
+  3. BUTTONS
+─────────────────────────────────────────────*/
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+button {
+  flex: 1;
+  padding: 10px 0;
+  font-size: 1rem;
+  border: none;
+  background: #CA7842;   /* Warm Orange */
+  color: #F0F2BD;        /* Pale Cream text on button */
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+button:hover:not(:disabled) {
+  background: #A65E32;   /* Slightly darker orange on hover */
+}
+
+button:disabled {
+  background: #AAA;      /* Gray disabled */
+  cursor: not-allowed;
+}
+
+/*─────────────────────────────────────────────
+  4. STATUS MESSAGE
+─────────────────────────────────────────────*/
+#status {
+  margin-top: 12px;
+  font-size: 0.95rem;
+  color: #4B352A;        /* Dark Brown */
+  min-height: 1.2em;     /* Reserve vertical space for status text */
+}
+
+/*─────────────────────────────────────────────
+  5. RESPONSIVE
+─────────────────────────────────────────────*/
+@media (max-width: 500px) {
+  .container {
+    max-width: 95vw;
+  }
+  button {
+    font-size: 0.9rem;
+  }
+}
