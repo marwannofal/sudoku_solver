@@ -28,11 +28,10 @@ Subsequent solves for the same puzzle load directly from MongoDB cache for maxim
 ## Installation & Setup
 
 ##### 1. Clone the repository (or download the source):
-
    git clone https://github.com/marwannofal/sudoku_solver.git
    cd sudoku_solver
 
-2. (Optional) Create and activate a virtual environment (highly recommended):
+##### 2. (Optional) Create and activate a virtual environment (highly recommended):
     python3 -m venv env
     source env/bin/activate     # On Linux/macOS
     env\Scripts\activate        # On Windows (PowerShell)
