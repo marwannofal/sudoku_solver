@@ -11,7 +11,8 @@ Subsequent solves for the same puzzle load directly from MongoDB cache for maxim
 1. [Prerequisites](#prerequisites)
 2. [Installation & Setup](#installation--setup)
 3. [Running the App](#running-the-app)
-4. [License](#license)
+4. [Sample to play](#Sample-to-play)
+5. [License](#license)
 
 ---
 
@@ -64,6 +65,9 @@ Subsequent solves for the same puzzle load directly from MongoDB cache for maxim
     - The first time you solve a unique puzzle, OR-Tools CP-SAT will run (may take a few hundred milliseconds).
     - That puzzle + solution pair is stored in MongoDB.
     - Subsequent attempts to solve the same puzzle will return the cached result in just a few milliseconds.
+
+## Sample to play
+- There is a sample to play the game look at the you should see it or clik here [sample to play](sample_to_play.txt)
 
 ## License
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
