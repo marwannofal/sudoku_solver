@@ -27,7 +27,7 @@ Subsequent solves for the same puzzle load directly from MongoDB cache for maxim
 
 ## Installation & Setup
 
-1. **Clone the repository** (or download the source):
+##### 1. Clone the repository** (or download the source):
 
    git clone https://github.com/marwannofal/sudoku_solver.git
    cd sudoku_solver
