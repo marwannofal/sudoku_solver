@@ -46,9 +46,9 @@ Subsequent solves for the same puzzle load directly from MongoDB cache for maxim
     setx MONGO_URI "mongodb://username:password@hostname:27017/"
 
 ## Running the App
-1. Start the FastAPI server using Uvicorn:
+##### 1. Start the FastAPI server using Uvicorn:
     uvicorn app:app --reload
-2. Open your browser at:
+##### 3. Open your browser at:
     http://127.0.0.1:8000/
 3. Use the Sudoku solver
 
