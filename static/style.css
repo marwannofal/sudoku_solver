@@ -1,136 +1,354 @@
 /* static/style.css */
 
+/* ==========================================
+   APPLE-LIKE GLASS THEME (Light + Dark)
+   - same layout
+   - glass card
+   - glass grid
+   - 3x3 borders
+========================================== */
+
+/* Light (Ocean Glass) */
+:root{
+  --bg: #EAF6FF;
+  --text: #0B2A3A;
+
+  --grid-border: rgba(11,42,58,0.35);
+  --cell-bg: rgba(255,255,255,0.20);
+  --focus-bg: rgba(255,255,255,0.38);
+
+  --accent: #1E7AA8;
+  --accent-hover: #155E82;
+  --btn-text: #FFFFFF;
+
+  --muted-text: rgba(11, 42, 58, 0.75);
+  --disabled-bg: rgba(11,42,58,0.18);
+
+  /* glass surfaces */
+  --card-bg: rgba(255,255,255,0.46);
+  --card-border: rgba(11,42,58,0.16);
+
+  --panel-bg: rgba(255,255,255,0.22);
+  --panel-border: rgba(11,42,58,0.14);
+
+  /* shadows (soft + apple-like) */
+  --shadow-lg: 0 28px 80px rgba(11,42,58,0.18);
+  --shadow-md: 0 16px 40px rgba(11,42,58,0.14);
+  --shadow-sm: 0 10px 24px rgba(11,42,58,0.10);
+
+  --ring: rgba(30,122,168,0.35);
+}
+
+/* Dark (Ocean Glass Night) */
+:root[data-theme="dark"]{
+  --bg: #07131C;
+  --text: #EAF6FF;
+
+  --grid-border: rgba(234,246,255,0.22);
+  --cell-bg: rgba(255,255,255,0.05);
+  --focus-bg: rgba(59,179,224,0.10);
+
+  --accent: #3BB3E0;
+  --accent-hover: #2A93BA;
+  --btn-text: #061018;
+
+  --muted-text: rgba(234, 246, 255, 0.72);
+  --disabled-bg: rgba(234,246,255,0.10);
+
+  --card-bg: rgba(13,34,48,0.48);
+  --card-border: rgba(234,246,255,0.12);
+
+  --panel-bg: rgba(255,255,255,0.04);
+  --panel-border: rgba(234,246,255,0.10);
+
+  --shadow-lg: 0 28px 80px rgba(0,0,0,0.42);
+  --shadow-md: 0 18px 44px rgba(0,0,0,0.34);
+  --shadow-sm: 0 10px 26px rgba(0,0,0,0.26);
+
+  --ring: rgba(59,179,224,0.35);
+}
+
+/* Optional: auto dark if user prefers */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #07131C;
+    --text: #EAF6FF;
+
+    --grid-border: rgba(234,246,255,0.22);
+    --cell-bg: rgba(255,255,255,0.05);
+    --focus-bg: rgba(59,179,224,0.10);
+
+    --accent: #3BB3E0;
+    --accent-hover: #2A93BA;
+    --btn-text: #061018;
+
+    --muted-text: rgba(234, 246, 255, 0.72);
+    --disabled-bg: rgba(234,246,255,0.10);
+
+    --card-bg: rgba(13,34,48,0.48);
+    --card-border: rgba(234,246,255,0.12);
+
+    --panel-bg: rgba(255,255,255,0.04);
+    --panel-border: rgba(234,246,255,0.10);
+
+    --shadow-lg: 0 28px 80px rgba(0,0,0,0.42);
+    --shadow-md: 0 18px 44px rgba(0,0,0,0.34);
+    --shadow-sm: 0 10px 26px rgba(0,0,0,0.26);
+
+    --ring: rgba(59,179,224,0.35);
+  }
+}
+
 /*─────────────────────────────────────────────
   0. GLOBAL RESET & LAYOUT
 ─────────────────────────────────────────────*/
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-body {
+body{
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background: #F0F2BD; /* Pale Cream */
+  min-height: 100vh;
+  padding: 28px 16px;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  min-height: 100vh;
-  padding: 20px;
+  color: var(--text);
+
+  /* Apple-like layered glassy background */
+  background:
+    radial-gradient(1100px 700px at 18% 12%, rgba(59,179,224,0.26), transparent 60%),
+    radial-gradient(900px 650px at 82% 10%, rgba(191,227,246,0.45), transparent 58%),
+    radial-gradient(900px 700px at 70% 75%, rgba(30,122,168,0.22), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,0.22), rgba(255,255,255,0.00)),
+    var(--bg);
 }
 
-.container {
+.container{
   width: 100%;
-  max-width: 420px;
+  max-width: 460px;
   text-align: center;
+
+  /* glass card */
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 22px;
+  padding: 18px 16px 16px;
+  box-shadow: var(--shadow-lg);
+
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
 }
 
 /*─────────────────────────────────────────────
   1. HEADING
 ─────────────────────────────────────────────*/
-.container h1 {
-  margin-bottom: 16px;
-  color: #4B352A; /* Dark Brown */
-  font-size: 1.75rem;
+.container h1{
+  margin-bottom: 14px;
+  font-size: 1.7rem;
+  letter-spacing: 0.3px;
+  color: var(--text);
 }
 
 /*─────────────────────────────────────────────
-  2. SUDOKU GRID
+  2. SUDOKU GRID (APPLE GLASS)
 ─────────────────────────────────────────────*/
-.sudoku-grid {
+.sudoku-grid{
   display: grid;
   grid-template-columns: repeat(9, 1fr);
-  gap: 2px;
-  background: #4B352A;  /* Dark Brown border around entire grid */
-  border: 4px solid #4B352A;
-  margin: 0 auto 16px;
+  gap: 8px;
+  margin: 12px auto 14px;
   width: 100%;
-  aspect-ratio: 1 / 1; /* The entire grid stays square */
+  aspect-ratio: 1 / 1;
+
+  /* inner glass panel */
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 18px;
+  padding: 12px;
+
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
 }
 
-.sudoku-grid input {
+.sudoku-grid input{
   width: 100%;
-  aspect-ratio: 1 / 1;      /* Each cell is a perfect square */
-  display: flex;            /* Center the digit via flexbox */
-  align-items: center;      /* Vertical center */
-  justify-content: center;  /* Horizontal center */
-  font-size: 1.1rem;
-  font-weight: bold;
-  text-align: center;       /* Not strictly needed once we have flex centering */
-  border: 1px solid #4B352A;/* Dark Brown for normal cell borders */
-  background: #B2CD9C;      /* Soft Green background inside each cell */
-  color: #4B352A;           /* Dark Brown digit color */
+  aspect-ratio: 1 / 1;
+
+  display: grid;
+  place-items: center;
+
+  font-size: 1.05rem;
+  font-weight: 800;
+  text-align: center;
+
+  /* glass tile */
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.22), rgba(255,255,255,0.06)),
+    var(--cell-bg);
+  border: 1px solid var(--grid-border);
+  border-radius: 14px;
+
+  color: var(--text);
   outline: none;
+
+  /* Apple-like depth */
+  box-shadow:
+    0 10px 26px rgba(0,0,0,0.12),
+    inset 0 1px 0 rgba(255,255,255,0.28);
+
+  transition:
+    transform .10s ease,
+    box-shadow .20s ease,
+    border-color .20s ease,
+    background .20s ease;
 }
 
-/* Thicker vertical borders every 3 columns */
-.sudoku-grid input:nth-child(3n) {
-  border-right: 3px solid #4B352A; /* Dark Brown, a bit thicker */
+:root[data-theme="dark"] .sudoku-grid input{
+  box-shadow:
+    0 14px 30px rgba(0,0,0,0.30),
+    inset 0 1px 0 rgba(255,255,255,0.10);
 }
 
-/* Thicker horizontal borders every 3 rows */
-.sudoku-grid input:nth-child(n + 19):nth-child(-n + 27),
-.sudoku-grid input:nth-child(n + 46):nth-child(-n + 54),
-.sudoku-grid input:nth-child(n + 73):nth-child(-n + 81) {
-  border-bottom: 3px solid #4B352A; /* Dark Brown, slightly thicker */
+.sudoku-grid input:hover{
+  transform: translateY(-1px);
 }
 
-/* Focus highlight */
-.sudoku-grid input:focus {
-  background: #F0F2BD;  /* Pale Cream when focused for high contrast */
-  border-color: #CA7842;/* Warm Orange border on focus */
-  z-index: 10;
+.sudoku-grid input:focus{
+  background: var(--focus-bg);
+  border-color: var(--accent);
+  box-shadow:
+    0 0 0 4px var(--ring),
+    0 16px 38px rgba(0,0,0,0.14),
+    inset 0 1px 0 rgba(255,255,255,0.32);
+  transform: translateY(-1px);
 }
 
 /*─────────────────────────────────────────────
-  3. BUTTONS
+  2.1 3×3 BLOCK BORDERS (OUTSIDE BORDER PER SQUARE)
 ─────────────────────────────────────────────*/
-.buttons {
+/* Make base borders thin */
+.sudoku-grid input{
+  border-width: 1px;
+}
+
+/* Left border of each 3×3 block: cols 1,4,7 */
+.sudoku-grid input:nth-child(9n + 1),
+.sudoku-grid input:nth-child(9n + 4),
+.sudoku-grid input:nth-child(9n + 7){
+  border-left-width: 3px;
+  border-left-color: var(--accent);
+}
+
+/* Right border of each 3×3 block: cols 3,6,9 */
+.sudoku-grid input:nth-child(9n + 3),
+.sudoku-grid input:nth-child(9n + 6),
+.sudoku-grid input:nth-child(9n + 9){
+  border-right-width: 3px;
+  border-right-color: var(--accent);
+}
+
+/* Top border of each 3×3 block: rows 1,4,7 */
+.sudoku-grid input:nth-child(-n + 9),
+.sudoku-grid input:nth-child(n + 28):nth-child(-n + 36),
+.sudoku-grid input:nth-child(n + 55):nth-child(-n + 63){
+  border-top-width: 3px;
+  border-top-color: var(--accent);
+}
+
+/* Bottom border of each 3×3 block: rows 3,6,9 */
+.sudoku-grid input:nth-child(n + 19):nth-child(-n + 27),
+.sudoku-grid input:nth-child(n + 46):nth-child(-n + 54),
+.sudoku-grid input:nth-child(n + 73):nth-child(-n + 81){
+  border-bottom-width: 3px;
+  border-bottom-color: var(--accent);
+}
+
+/*─────────────────────────────────────────────
+  3. BUTTONS (APPLE GLASS)
+─────────────────────────────────────────────*/
+.buttons{
   display: flex;
   justify-content: center;
   gap: 12px;
   margin-bottom: 8px;
+  margin-top: 4px;
 }
 
-button {
+/* Solve/Clear keep glassy */
+button{
   flex: 1;
-  padding: 10px 0;
-  font-size: 1rem;
-  border: none;
-  background: #CA7842;   /* Warm Orange */
-  color: #F0F2BD;        /* Pale Cream text on button */
-  border-radius: 4px;
+  padding: 11px 0;
+  font-size: 0.98rem;
+  font-weight: 750;
+
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.28);
+
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.22), rgba(255,255,255,0.06)),
+    var(--accent);
+  color: var(--btn-text);
+
   cursor: pointer;
-  transition: background 0.2s ease-in-out;
+
+  box-shadow: var(--shadow-sm);
+  transition: transform .10s ease, background .18s ease, box-shadow .18s ease;
 }
 
-button:hover:not(:disabled) {
-  background: #A65E32;   /* Slightly darker orange on hover */
+button:hover:not(:disabled){
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.22), rgba(255,255,255,0.06)),
+    var(--accent-hover);
+  transform: translateY(-1px);
 }
 
-button:disabled {
-  background: #AAA;      /* Gray disabled */
+button:active:not(:disabled){
+  transform: translateY(0px);
+}
+
+button:disabled{
+  background: var(--disabled-bg);
+  box-shadow: none;
   cursor: not-allowed;
+}
+
+/* Theme toggle = NO background (as you requested) */
+.theme-toggle{
+  flex: 0;
+  width: 46px;
+  min-width: 46px;
+  padding: 11px 0;
+
+  background: transparent !important;
+  border: 1px solid var(--grid-border);
+  color: var(--text);
+  box-shadow: none !important;
+}
+
+.theme-toggle:hover:not(:disabled){
+  background: rgba(255,255,255,0.10) !important;
+}
+
+:root[data-theme="dark"] .theme-toggle:hover:not(:disabled){
+  background: rgba(234,246,255,0.08) !important;
 }
 
 /*─────────────────────────────────────────────
   4. STATUS MESSAGE
 ─────────────────────────────────────────────*/
-#status {
-  margin-top: 12px;
+#status{
+  margin-top: 10px;
   font-size: 0.95rem;
-  color: #4B352A;        /* Dark Brown */
-  min-height: 1.2em;     /* Reserve vertical space for status text */
+  color: var(--muted-text);
+  min-height: 1.2em;
 }
 
 /*─────────────────────────────────────────────
   5. RESPONSIVE
 ─────────────────────────────────────────────*/
-@media (max-width: 500px) {
-  .container {
-    max-width: 95vw;
-  }
-  button {
-    font-size: 0.9rem;
-  }
+@media (max-width: 500px){
+  .container{ max-width: 95vw; border-radius: 18px; }
+  .sudoku-grid{ gap: 7px; padding: 10px; border-radius: 16px; }
+  .sudoku-grid input{ border-radius: 12px; font-size: 1rem; }
+  button{ font-size: 0.9rem; border-radius: 12px; }
 }

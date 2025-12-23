@@ -5,6 +5,28 @@ document.addEventListener("DOMContentLoaded", () => {
   const solveBtn = document.getElementById("solveBtn");
   const clearBtn = document.getElementById("clearBtn");
   const statusP = document.getElementById("status");
+  const themeBtn = document.getElementById("themeBtn");
+
+  function applyTheme(theme) {
+    // theme: "light" | "dark"
+    document.documentElement.setAttribute("data-theme", theme);
+    themeBtn.textContent = theme === "dark" ? "☀️" : "🌙";
+    themeBtn.title = theme === "dark" ? "Light mode" : "Dark mode";
+  }
+
+  // Load saved theme, otherwise follow system preference
+  const savedTheme = localStorage.getItem("theme");
+  const systemPrefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  applyTheme(savedTheme || (systemPrefersDark ? "dark" : "light"));
+
+  themeBtn.addEventListener("click", () => {
+    const current = document.documentElement.getAttribute("data-theme") || "light";
+    const next = current === "dark" ? "light" : "dark";
+    localStorage.setItem("theme", next);
+    applyTheme(next);
+  });
+
 
   // 1) Build a 9×9 grid of <input> elements
   for (let r = 0; r < 9; r++) {
